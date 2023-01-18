@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [Count, setCount] = useState(0);
+  const handleAdd = () => {
+    setCount(Count + 1);
+  };
+  const handleSub = () => {
+    setCount(Count - 1);
+  };
+  const handleClear = () => {
+    setCount(0);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="container">
+        <div className="element name">Clicker</div>
+        <div className="element buttons">
+          <button onClick={handleAdd} className="button enabled">
+            <span>+</span>
+          </button>
+          <button
+            disabled={Count === 0}
+            onClick={handleSub}
+            className={"button " + (Count === 0 ? "disabled" : "enabled")}
+          >
+            <span>-</span>
+          </button>
+          <button
+            onClick={handleClear}
+            className={"button " + (Count === 0 ? "disabled" : "enabled")}
+          >
+            <span>x</span>
+          </button>
+        </div>
+        {Count === 0 ? (
+          <div style={{ fontSize: "5vw" }} className="element result">
+            Click add button to start!
+          </div>
+        ) : (
+          <div className="element result">{Count}</div>
+        )}
+      </div>
     </div>
   );
+
+  // k ezz now wot need to learn
 }
 
 export default App;
